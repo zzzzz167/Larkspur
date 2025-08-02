@@ -43,11 +43,11 @@ fn main() -> Result<(), anyhow::Error>  {
 
     let mut bpf = aya::Ebpf::load(aya::include_bytes_aligned!(concat!(
         env!("OUT_DIR"),
-        "/larkspur"
+        "/larkspur-on-cpu"
     )))?;
 
     let program: &mut PerfEvent =
-        bpf.program_mut("larkspur").unwrap().try_into()?;
+        bpf.program_mut("larkspur-on-cpu").unwrap().try_into()?;
     program.load()?;
 
     let cpus = online_cpus().unwrap();

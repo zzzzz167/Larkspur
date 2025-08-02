@@ -3,7 +3,8 @@ resolver = "2"
 members = [
     "larkspur",
     "larkspur-common",
-    "larkspur-ebpf",
+    "xtask",
+    "larkspur-ebpf-*",
 ]
 default-members = ["larkspur", "larkspur-common"]
 
@@ -29,6 +30,6 @@ log = { version = "0.4.22", default-features = false }
 tokio = { version = "1.40.0", default-features = false }
 which = { version = "6.0.0", default-features = false }
 
-[profile.release.package.larkspur-ebpf]
+[profile.release.package.larkspur-ebpf-on-cpu]
 debug = 2
 codegen-units = 1

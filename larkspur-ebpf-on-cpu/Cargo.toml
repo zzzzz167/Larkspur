@@ -1,5 +1,5 @@
 [package]
-name = "larkspur-ebpf"
+name = "larkspur-ebpf-on-cpu"
 version = "0.1.0"
 edition.workspace = true
 
@@ -13,7 +13,7 @@ aya-log-ebpf = { workspace = true }
 which = { workspace = true }
 
 [[bin]]
-name = "larkspur"
+name = "larkspur-on-cpu"
 path = "src/main.rs"
 
 [profile.dev]
