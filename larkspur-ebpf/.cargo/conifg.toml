@@ -1,0 +1,11 @@
+[build]
+target = "bpfel-unknown-none"
+
+[unstable]
+build-std = ["core", "compiler_builtins"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
