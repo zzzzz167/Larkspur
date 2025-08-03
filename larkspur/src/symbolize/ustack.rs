@@ -29,12 +29,12 @@ impl UstackSymbol {
     }
 }
 
-pub struct Resover{
+pub struct Resolver{
     pid: Pid,
     maps: Vec<MapRange>,
 }
 
-impl Resover {
+impl Resolver {
     pub fn new(pid: Pid) -> anyhow::Result<Self> {
         let maps = get_process_maps(pid)?;
         Ok(Self { pid, maps })

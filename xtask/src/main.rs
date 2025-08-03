@@ -27,6 +27,7 @@ fn main() -> anyhow::Result<()> {
         Commands::BuildEbpf { package} => build_ebpf(&package),
         Commands::BuildAll => {
             build_ebpf("larkspur-ebpf-on-cpu")?;
+            build_ebpf("larkspur-ebpf-off-cpu")?;
             build_user()?;
             Ok(())
         }

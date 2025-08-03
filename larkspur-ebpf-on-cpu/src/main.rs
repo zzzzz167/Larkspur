@@ -19,7 +19,7 @@ static USTACKS: StackTrace = StackTrace::with_max_entries(16384, 0);
 static BUF: PerCpuArray<Sample> = PerCpuArray::with_max_entries(1, 0);
 
 #[perf_event]
-pub fn larkspur(_ctx: PerfEventContext) -> u32 {
+pub fn on_cpu_trace(_ctx: PerfEventContext) -> u32 {
     let pid = (bpf_get_current_pid_tgid() >> 32) as u32;
     let cpu = unsafe { bpf_get_smp_processor_id() };
 
