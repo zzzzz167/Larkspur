@@ -17,6 +17,7 @@ pub struct UstackSymbol {
     pub file: Option<String>,
     pub line: Option<u32>,
     pub offset: u64,
+    pub inline: bool
 }
 
 impl UstackSymbol {
@@ -64,6 +65,7 @@ impl Resolver {
                 function: None,
                 file: None,
                 line: None,
+                inline: false
             }];
         };
 
@@ -72,6 +74,7 @@ impl Resolver {
             function: None,
             file: None,
             line: None,
+            inline: false
         }])
     }
 
@@ -150,6 +153,7 @@ fn symbolize_elf(binary_path: &str, offset: u64) ->Result<Vec<UstackSymbol>> {
             function: None,
             file: None,
             line: None,
+            inline: false
     }])
 }
 
@@ -179,6 +183,7 @@ fn symbolize_with_path(path: &str, offset: u64) -> Result<Vec<UstackSymbol>> {
                         })
                         .map(|p| p.to_string_lossy().into_owned()),
                     line: s.code_info.as_ref().and_then(|ci| ci.line),
+                    inline: false
                 });
                 for inl in &*s.inlined{
                     out.push(UstackSymbol{
@@ -195,6 +200,7 @@ fn symbolize_with_path(path: &str, offset: u64) -> Result<Vec<UstackSymbol>> {
                             })
                             .map(|p| p.to_string_lossy().into_owned()),
                         line: inl.code_info.as_ref().and_then(|ci| ci.line),
+                        inline: true
                     })
                 }},
                 symbolize::Symbolized::Unknown(_) => {}
