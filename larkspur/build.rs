@@ -8,11 +8,11 @@ fn main() -> anyhow::Result<()> {
         .context("MetadataCommand::exec")?;
     let ebpf_packages: Vec<_> = packages
         .into_iter()
-        .find(|p| p.name.starts_with("larkspur-ebpf-"))
-        .into_iter().collect();
+        .filter(|p| p.name.starts_with("larkspur-ebpf"))
+        .collect();
 
     if ebpf_packages.is_empty() {
-        return Err(anyhow!("⚠️  没有发现任何 larkspur-ebpf-* 包，跳过 eBPF 构建"));
+        return Err(anyhow!("⚠️  Not found any larkspur-ebpf-*，Skipping eBPF builds {}", ebpf_packages.len()));
     }
 
     aya_build::build_ebpf(ebpf_packages)?;
